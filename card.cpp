@@ -8,7 +8,6 @@
 
 #include "card.h"
 
-
 Card::Card(int cS,int cN)
 {
     mSuit=static_cast<Suit>(cS);

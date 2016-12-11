@@ -42,8 +42,6 @@ void Hand::HandInfo()
     {
         std::cout<<hand[i].CardInfo()<<std::endl;
     }
-    
-    
 }
 void CheckMade
 (std::vector<Card> & cHand,std::vector<int> & AllNum,std::vector<int> & UniquedCard,std::vector<int> & SuitCard)
@@ -112,7 +110,6 @@ void IsPairOrThreeOrFourKind
     }
     if(checkPair==2){twoPair=true;}
     if(onePair==true&&Three==true){fullhouse=true;}
-    
 }
 void IsStraightOrFlush(std::vector<int> & NumOfHand,std::vector<int> & SuitOfHand,bool & straight,bool & flush)
 {
@@ -229,8 +226,6 @@ Match compareonepair(std::vector<Card> & hand1,std::vector<Card> & hand2)
     }
     else
         return Defeat;
-    
-    
 }
 Match comparetwopair(std::vector<Card> & hand1,std::vector<Card> & hand2)
 {
