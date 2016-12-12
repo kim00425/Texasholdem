@@ -22,7 +22,7 @@ public:
     Deck();
     void setDeck();
     void CardInfo();
-    Card GiveCard()const;
+    Card  GiveCard()const;
     ~Deck(){};
     
 };

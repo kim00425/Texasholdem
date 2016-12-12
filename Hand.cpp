@@ -105,10 +105,11 @@ void IsPairOrThreeOrFourKind
             ++checkPair;
             onePair=true;
         }
+        if(checkPair==2){twoPair=true;}
         if(cnt==3){Three=true;}
         if(cnt==4){fourKind=true;}
     }
-    if(checkPair==2){twoPair=true;}
+    
     if(onePair==true&&Three==true){fullhouse=true;}
 }
 void IsStraightOrFlush(std::vector<int> & NumOfHand,std::vector<int> & SuitOfHand,bool & straight,bool & flush)
@@ -176,6 +177,9 @@ Match comparenopair(std::vector<Card> & hand1,std::vector<Card> & hand2)
         a|=1<<hand1[i].GetNum();
         b|=1<<hand1[i].GetNum();
     }
+    std::cout<<a<<std::endl;
+    std::cout<<b<<std::endl;
+    
     if(a>b) return Win;
     else if(a==b) return Draw;
     else
@@ -463,7 +467,7 @@ PokerRank Hand::Check_Rank()
     
     
     BitMade(numofhand, suitofcards, num, suit);
-    IsPairOrThreeOrFourKind(numofhand, uniqueofcards, onepair, twopair, three, fourkind, fullhouse);
+    IsPairOrThreeOrFourKind(numofhand,uniqueofcards, onepair, twopair, three, fourkind, fullhouse);
     IsStraightOrFlush(numofhand, suitofcards, straight, flush);
     
     if(flush&&straight){return StraihtFlush;}

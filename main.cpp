@@ -18,9 +18,9 @@ int main()
             p1=deck;
             p2=deck;
         }
-        p1.PlayerInfo();
-        cout<<endl;
-        p2.PlayerInfo();
-        Match a=CompareRank(p1, p2);
-        cout<<a<<endl;
+    p1.PlayerInfo();
+    cout<<endl;
+    p2.PlayerInfo();
+    Match a=CompareRank(p1, p2);
+    cout<<a<<endl;
 }

@@ -44,7 +44,7 @@ Player& Player::operator=(const Card &icard)
 Player& Player::operator=(const Deck &ideck)
 {
     this->mHand=ideck.GiveCard();
-    this->mRank=mHand.Check_Rank();
+    this->mRank=this->Rank();
     return *this;
 }
 PokerRank Player::Rank()
@@ -53,7 +53,6 @@ PokerRank Player::Rank()
 }
 Match Player::operator>(Player & p1)
 {
-    
     if(this->mRank>p1.mRank)
         return Win;
     else if(this->mRank==p1.mRank)
@@ -66,12 +65,11 @@ Match Player::operator>(Player & p1)
     }
     else
         return Defeat;
-    
-    
-    
 }
 Match CompareRank(Player & player1,Player &player2)
 {
+    player1.Rank();
+    player2.Rank();
     return player1>player2;
 }
 
