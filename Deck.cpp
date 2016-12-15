@@ -20,7 +20,7 @@ Deck::Deck()
     }
     std::random_shuffle(mDeck.begin(),mDeck.end(),myrandom);
 }
-Card Deck::GiveCard() const
+Card Deck::DrawCard() const
 {
     static int i=0;
     Card temp;
@@ -40,4 +40,5 @@ void Deck::CardInfo()
     {
         std::cout<<mDeck[i].CardInfo()<<std::endl;
     }
+       
 }

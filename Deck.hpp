@@ -9,10 +9,9 @@
 #ifndef Deck_hpp
 #define Deck_hpp
 #include "card.h"
-#include"Player.hpp"
 #include<vector>
 #include<iostream>
-class Player;
+
 
 class Deck
 {
@@ -22,7 +21,7 @@ public:
     Deck();
     void setDeck();
     void CardInfo();
-    Card  GiveCard()const;
+    Card DrawCard()const;
     ~Deck(){};
     
 };

@@ -11,24 +11,30 @@
 #include"card.h"
 #include"Hand.hpp"
 #include"Deck.hpp"
+#include"Host.hpp"
 #include<iostream>
-typedef enum Action{Raise,Call,Fold}Action;
+typedef enum Action{Raise=1,Call,Fold}Action;
+using int32=unsigned int;
 class Deck;
+class Host;
 class Player
 {
 private:
     Hand mHand;
     Action mAction;
-    unsigned int money;
+    int32 mStack;
     PokerRank mRank;
 public:
     Player();
     Player& operator=(const Hand &);
     Player& operator=(const Card &);
-    Player& operator=(const Deck &);
+    Player& operator=(Host &);
     Match operator>(Player &);
     PokerRank Rank();
     Hand GetHand(){return mHand;}
+    int32 GetStack(){return mStack;}
+    Action GetAction(){return mAction;}
+    void Bet(Action action,int32 & GameStack);
     void PlayerInfo();
 };
 Match CompareRank(Player &,Player &);

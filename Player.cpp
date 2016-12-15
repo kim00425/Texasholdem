@@ -9,8 +9,40 @@
 #include "Player.hpp"
 Player::Player()
 {
-    
+    mStack=1000000;
 }
+void Player::Bet(Action action,int32 & GameStack)
+{
+    if(action==Fold)
+    {
+        mAction=Fold;
+        std::cout<<"Fold!!"<<std::endl;
+    }
+    else if(action==Call)
+    {
+        mAction=Call;
+        mStack-=GameStack;
+        if(mStack<GameStack)
+        {
+            mStack-=mStack;
+        }
+    }
+    else if(action==Raise)
+    {
+        mAction=Raise;
+        int32 Return_Stack;
+        std::cout<<"How much bet?:";
+        while(std::cin>>Return_Stack)
+        {
+            if(mStack>Return_Stack)
+                mStack-=Return_Stack;
+                break;
+            std::cout<<"You don't have this Stack!! again bet"<<std::endl;
+        }
+        GameStack=GameStack+Return_Stack;
+    }
+}
+
 void Player::PlayerInfo()
 {
     mHand.HandInfo();
@@ -41,9 +73,9 @@ Player& Player::operator=(const Card &icard)
     this->mRank=mHand.Check_Rank();
     return *this;
 }
-Player& Player::operator=(const Deck &ideck)
+Player& Player::operator=(Host &ihost)
 {
-    this->mHand=ideck.GiveCard();
+    this->mHand=ihost.GiveCard();
     this->mRank=this->Rank();
     return *this;
 }

@@ -19,9 +19,11 @@ private:
     Num mNum;
 public:
     Card(int cS=0,int cN=2);
+    Card(const Card &);
     std::string CardInfo();
     Num GetNum(){return mNum;} const
-    Suit GetSuit(){return mSuit;} 
+    Suit GetSuit(){return mSuit;}
+    Card GetCard(){return *this;};
     bool operator<(const Card & cCard) const;
     ~Card();
 };

@@ -13,6 +13,13 @@ Card::Card(int cS,int cN)
     mSuit=static_cast<Suit>(cS);
     mNum=static_cast<Num>(cN);
 }
+Card::Card(const Card & copy)
+{
+    mSuit=copy.mSuit;
+    mNum=copy.mNum;
+    
+    
+}
 std::string Card::CardInfo() // About card(num,suit)
 {
     std::string su;
