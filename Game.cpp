@@ -7,9 +7,9 @@
 //
 
 #include "Game.hpp"
-Game::Game():round(PRE_FLOP),Stack(1000)
+Game::Game():round(PRE_FLOP)
 {
-    
+    std::cout<<"How much pot for Buy-In?:";std::cin>>RaiseStack;
 }
 void Game::set_round(Round r)
 {
@@ -62,27 +62,35 @@ void Game::Show_player()
 }
 void Game::Play()
 {
-    int action;
+    int action=0;
     for(int i=0;i<mPlayer.size();i++)
     {
         action=Check_Action(mPlayer[i]);
-        if(action==Fold) continue;
-        std::cout<<"Yours Card"<<std::endl;
+        if(action==Fold||mPlayer[i].GetAction()==Allin)
+            continue;
+        
+        std::cout<<mPlayer[i].GetName()<<" Player Card"<<std::endl;
         mPlayer[i].PlayerInfo();
         std::cout<<"Yours Stack:"<<mPlayer[i].GetStack()<<std::endl;
-        std::cout<<"Are you Bet?(1=Raise,2=Call,3=Fold):";
+        std::cout<<"Call Pot:"<<RaiseStack<<std::endl;
+        std::cout<<"Are you Bet?(1=All-In,2=Raise,3=Call,4=Fold):";
         std::cin>>action;
-        mPlayer[i].Bet(static_cast<Action>(action), Stack);
+        SumStack+=mPlayer[i].Bet(static_cast<Action>(action),RaiseStack);
         std::cout<<"Your Stack:"<<mPlayer[i].GetStack()<<std::endl;
         std::cout<<std::endl;
     }
 }
-void Game::winner_player()
+void Game::Winner_Player()
 {
     for(int i=0;i<mPlayer.size();i++)
     {
-        CompareRank(mPlayer[i], mPlayer[i+1]);
+        if(mPlayer[i].GetAction()!=Fold)
+            wPlayer.push_back(&mPlayer[i]);
     }
+    sort(wPlayer.begin(),wPlayer.end());
+    std::cout<<"승자:"<<wPlayer[0]->GetName()<<std::endl;
+    std::cout<<"핸드:"<<std::endl;
+    wPlayer[0]->PlayerInfo();
 }
 Action Game::Check_Action(Player p1)
 {

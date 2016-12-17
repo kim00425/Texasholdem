@@ -15,7 +15,11 @@ int main()
     Game game;
     game.make_player(3);
     game.Play();
+    game.set_round(FLOP);
     game.Play();
+    game.set_round(TURN);
+    game.Play();
+    game.Winner_Player();
     
     
     

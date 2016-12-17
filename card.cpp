@@ -17,8 +17,6 @@ Card::Card(const Card & copy)
 {
     mSuit=copy.mSuit;
     mNum=copy.mNum;
-    
-    
 }
 std::string Card::CardInfo() // About card(num,suit)
 {

@@ -23,8 +23,10 @@ class Game
 private:
     std::vector<Player> mPlayer;
     std::vector<Card> FiveDraw;
+    std::vector<Player*> wPlayer;
     Host host;
-    int32 Stack;
+    int32 SumStack;
+    int32 RaiseStack;
     Round round;
 public:
     Game();
@@ -33,7 +35,7 @@ public:
     void Play();
     void Show_player();
     Action Check_Action(Player);
-    void winner_player();
+    void Winner_Player();
 };
 
 

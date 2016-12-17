@@ -9,10 +9,13 @@
 #include "Player.hpp"
 Player::Player()
 {
-    mStack=1000000;
+    std::cout<<"What is your name?:";std::cin>>mName;
+    std::cout<<"How many do you have money?:";std::cin>>mStack;
+    
 }
-void Player::Bet(Action action,int32 & GameStack)
+int32 Player::Bet(Action action,int32 & raisestack)
 {
+    int32 Return_Stack=0;
     if(action==Fold)
     {
         mAction=Fold;
@@ -21,27 +24,56 @@ void Player::Bet(Action action,int32 & GameStack)
     else if(action==Call)
     {
         mAction=Call;
-        mStack-=GameStack;
-        if(mStack<GameStack)
+        if(mStack<raisestack)
         {
-            mStack-=mStack;
+            
+            Return_Stack=mStack;
+            mStack=0;
+            mAction=Allin;
+            std::cout<<"All-In!!"<<std::endl;
+            return Return_Stack;
         }
+        mStack-=raisestack;
+        Return_Stack=raisestack;
     }
     else if(action==Raise)
     {
         mAction=Raise;
-        int32 Return_Stack;
         std::cout<<"How much bet?:";
         while(std::cin>>Return_Stack)
         {
-            if(mStack>Return_Stack)
+            if(Return_Stack>mStack)
+            {
+                std::cout<<"You don't have this Stack!! again bet"<<std::endl;
+                std::cout<<"How much bet?:";
+                continue;
+            }
+            else if(Return_Stack<raisestack)
+            {
+                std::cout<<"You must bet more than "<<raisestack<<" Try again"<<std::endl;
+                std::cout<<"How much bet?:";
+                continue;
+            }
+            else if(Return_Stack<=mStack)
+            {
+                std::cout<<"Raise Money:"<<Return_Stack<<std::endl;
+                raisestack+=(Return_Stack-raisestack);
                 mStack-=Return_Stack;
                 break;
-            std::cout<<"You don't have this Stack!! again bet"<<std::endl;
+            }
         }
-        GameStack=GameStack+Return_Stack;
     }
+    else if(action==Allin)
+    {
+        mAction=Allin;
+        Return_Stack=mStack;
+        raisestack+=(Return_Stack-raisestack);
+        mStack=0;
+        std::cout<<"All-In!!!"<<std::endl;
+    }
+    return Return_Stack;
 }
+
 
 void Player::PlayerInfo()
 {
@@ -83,25 +115,23 @@ PokerRank Player::Rank()
 {
     return mHand.Check_Rank();
 }
-Match Player::operator>(Player & p1)
+Match Player::operator==(Player & p1)
 {
-    if(this->mRank>p1.mRank)
-        return Win;
-    else if(this->mRank==p1.mRank)
-    {
-        Hand h1,h2;
-        h1=this->GetHand();
-        h2=p1.GetHand();
-        Match a=compare(h1, h2);
-        return a;
-    }
-    else
-        return Defeat;
+        if(this->mRank>p1.mRank)
+            return Win;
+        else if(this->mRank==p1.mRank)
+        {
+            Hand h1,h2;
+            h1=this->GetHand();
+            h2=p1.GetHand();
+            Match a=compare(h1, h2);
+            return a;
+        }
+        else
+            return Defeat;
 }
-Match CompareRank(Player & player1,Player &player2)
+bool Player::operator<(const Player & p1)
 {
-    player1.Rank();
-    player2.Rank();
-    return player1>player2;
+    return this->mRank>p1.mRank;
 }
 
