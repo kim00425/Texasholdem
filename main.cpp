@@ -1,12 +1,12 @@
 #include<iostream>
 #include<ctime>
-#include<algorithm>
+
 #include"card.h"
 #include"Hand.hpp"
 #include"Deck.hpp"
 #include"Player.hpp"
 #include"Game.hpp"
-#include<iterator>
+#include"Host.hpp"
 using namespace std;
 
 int main()
@@ -21,7 +21,4 @@ int main()
     game.Play();
     game.Winner_Player();
     
-    
-    
-    
-}
+    }

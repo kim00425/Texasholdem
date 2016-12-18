@@ -13,10 +13,10 @@
 #include<algorithm>
 #include<iterator>
 #include<iostream>
-using u16 =unsigned short;
+
 typedef enum PokerRank{noRank,onePair,twoPair,ThreeKind,Straight,Flush,FullHouse,FourKind,StraihtFlush}PokerRank;
 typedef enum Match{Defeat=-1,Win=1,Draw=2} Match;
-
+typedef unsigned u16;
 class Hand
 {
 private:

@@ -11,8 +11,7 @@
 #include "card.h"
 #include<vector>
 #include<iostream>
-
-
+#include<algorithm>
 class Deck
 {
 private:

@@ -14,7 +14,7 @@
 #include"Host.hpp"
 #include<iostream>
 typedef enum Action{Allin=1,Raise,Call,Fold}Action;
-using int32=unsigned int;
+typedef unsigned int int32;
 class Deck;
 class Host;
 class Player
