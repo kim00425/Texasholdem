@@ -1,5 +1,5 @@
 # Texasholdem
-this code is about Texas holdem.
-this is imcomplete code 
-this is completed to Player.cpp but i am doing verification
-and I am developing this code.
+2017. 01. 18.
+Xcode,gcc에서 컴파일 결과 이상없음, VS에서는 일부 형변환이나 주석때문에 경고문 일으킬 수 있음 조심!!
+Game클래스 Play()부분 Bet에서 코딩 시작해야함 -> 중간에 Raise 베팅이 나와도 전부 베팅하면 다음 라운드로 넘어감
+Game클래스 승자비교하는 함수 안 만듬 -> 베팅 중에 Fold 할 때 제외시키는 부분, 마지막 TURN에서 카드 비교해서 이기는 사람 Stack 다 가져가기
