@@ -1,11 +1,3 @@
-//
-//  card.h
-//  plama
-//
-//  Created by 무제 on 2016. 11. 27..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #ifndef card_h
 #define card_h
 #include<string>
@@ -25,6 +17,5 @@ public:
     Suit GetSuit(){return mSuit;}
     Card GetCard(){return *this;};
     bool operator<(const Card & cCard) const;
-    ~Card();
 };
 #endif /* card_h */

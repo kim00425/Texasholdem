@@ -1,11 +1,3 @@
-//
-//  Hand.hpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 30..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #ifndef Hand_hpp
 #define Hand_hpp
 #include"card.h"

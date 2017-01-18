@@ -1,98 +1,93 @@
-//
-//  Game.cpp
-//  plama
-//
-//  Created by 무제 on 2016. 12. 13..
-//  Copyright © 2016년 무제. All rights reserved.
-//
 
-#include "Game.hpp"
-Game::Game():round(PRE_FLOP)
+
+#include"Game.hpp"
+Game::Game():SumStack(0),round(PRE_FLOP)
 {
-    std::cout<<"How much pot for Buy-In?:";std::cin>>RaiseStack;
+    std::cout<<"How much pot for Buy-In?:";
+    std::cin>>RaiseStack;
+    std::cout<<std::endl;
+    Host host;
+    
+}
+void Game::make_player(int cnt_player)
+{
+    for(auto i=0;i<cnt_player;i++)
+    {
+        mPlayer.push_back(Player());
+    }
+    for(auto i=0;i<mPlayer.size();i++)
+    {
+        mPlayer[i]=host.GiveCard();
+        mPlayer[i]=host.GiveCard();
+    }
 }
 void Game::set_round(Round r)
 {
-    round=r;
-    if(round==FLOP)
+    this->round=r;
+    if(this->round==FLOP)
     {
-        for(int i=0;i<3;i++)
+        std::cout<<"\nFLOP!!";
+        Card FLOP1=host.GiveCard();
+        Card FLOP2=host.GiveCard();
+        Card FLOP3=host.GiveCard();
+        for(auto i=0;i<mPlayer.size();i++)
         {
-            FiveDraw.push_back(host.GiveCard());
-            for(int j=0;j<mPlayer.size();j++)
-            {
-                mPlayer[j]=FiveDraw[i];
-            }
+            mPlayer[i]=FLOP1;
+            mPlayer[i]=FLOP2;
+            mPlayer[i]=FLOP3;
         }
     }
-    else if(round==TURN)
+    else if(this->round==TURN)
     {
-        FiveDraw.push_back(host.GiveCard());
-        for(int j=0;j<mPlayer.size();j++)
+        std::cout<<"\nTURN!!";
+        Card TURN=host.GiveCard();
+        for(auto i=0;i<mPlayer.size();i++)
         {
-            mPlayer[j]=FiveDraw[3];
+            mPlayer[i]=TURN;
         }
     }
-    else if(round==RIVER)
+    else if(this->round==RIVER)
     {
-        FiveDraw.push_back(host.GiveCard());
-        for(int j=0;j<mPlayer.size();j++)
+        std::cout<<"\nRIVER!!";
+        Card RIVER=host.GiveCard();
+        for(auto i=0;i<mPlayer.size();i++)
         {
-            mPlayer[j]=FiveDraw[4];
+            mPlayer[i]=RIVER;
         }
-    }
-    else
-        FiveDraw.clear();
-}
-void Game::make_player(int i)
-{
-    for(int j=0;j<i;j++)
-    {
-        mPlayer.push_back(*new Player());
-        mPlayer[j]=host.GiveCard();
-        mPlayer[j]=host.GiveCard();
-    }
-}
-void Game::Show_player()
-{
-    for(int i=0;i<mPlayer.size();i++)
-    {
-        mPlayer[i].PlayerInfo();
     }
 }
 void Game::Play()
 {
-    int action=0;
-    for(int i=0;i<mPlayer.size();i++)
+    int action;
+    
+    for(auto i=mPlayer.begin();i<mPlayer.end();i++)
     {
-        action=Check_Action(mPlayer[i]);
-        if(action==Fold||mPlayer[i].GetAction()==Allin)
+        if(i->GetAction()==Fold)
+        {
+            i++;
             continue;
-        
-        std::cout<<mPlayer[i].GetName()<<" Player Card"<<std::endl;
-        mPlayer[i].PlayerInfo();
-        std::cout<<"Yours Stack:"<<mPlayer[i].GetStack()<<std::endl;
-        std::cout<<"Call Pot:"<<RaiseStack<<std::endl;
-        std::cout<<"Are you Bet?(1=All-In,2=Raise,3=Call,4=Fold):";
-        std::cin>>action;
-        SumStack+=mPlayer[i].Bet(static_cast<Action>(action),RaiseStack);
-        std::cout<<"Your Stack:"<<mPlayer[i].GetStack()<<std::endl;
-        std::cout<<std::endl;
+        }
+        std::cout<<"\n["<<i->GetName()<<"'s Info]"<<std::endl;
+        std::cout<<"Card:";
+        i->PlayerFullInfo();
+    
+        std::cout<<"Raise Stack:"<<this->RaiseStack;
+        std::cout<<"\nWhat do you gonna do?\nAll-in:1 Raise:2\nCall:3 Fold:4\nChoice:";
+        while(std::cin>>action)
+        {
+            if((Action)action<Action::Allin||(Action)action>Action::Fold)
+            {
+                std::cout<<"You must choice 1~4!!\nChoice:";
+                continue;
+            }
+                break;
+        }
+        this->SumStack+=i->Bet((Action)action, this->RaiseStack);
     }
 }
-void Game::Winner_Player()
+Game & Game::operator=(const Player & client_player)
 {
-    for(int i=0;i<mPlayer.size();i++)
-    {
-        if(mPlayer[i].GetAction()!=Fold)
-            wPlayer.push_back(&mPlayer[i]);
-    }
-    sort(wPlayer.begin(),wPlayer.end());
-    std::cout<<"승자:"<<wPlayer[0]->GetName()<<std::endl;
-    std::cout<<"핸드:"<<std::endl;
-    wPlayer[0]->PlayerInfo();
+    mPlayer.push_back(client_player);
+    return *this;
 }
-Action Game::Check_Action(Player p1)
-{
-    return p1.GetAction();
-}
+

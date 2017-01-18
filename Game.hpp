@@ -1,15 +1,5 @@
-//
-//  Game.hpp
-//  plama
-//
-//  Created by 무제 on 2016. 12. 13..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #ifndef Game_hpp
 #define Game_hpp
-
-#include <stdio.h>
 #include "card.h"
 #include "Hand.hpp"
 #include "Deck.hpp"
@@ -31,11 +21,12 @@ private:
 public:
     Game();
     void set_round(Round r);
-    void make_player(int i);
+    void make_player(int player);
     void Play();
     void Show_player();
-    Action Check_Action(Player);
-    void Winner_Player();
+   
+    
+    Game & operator=(const Player & client_player);
 };
 
 

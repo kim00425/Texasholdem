@@ -1,11 +1,3 @@
-//
-//  Player.hpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 29..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #ifndef Player_hpp
 #define Player_hpp
 #include"card.h"
@@ -38,7 +30,8 @@ public:
     int32 Bet(Action action,int32 & raisestack); //Bet
     
     //Get PlayerInformation and used Information
-    void PlayerInfo();                   //Show Info
+    void PlayerHandInfo();                   //Show HandInfo
+    void PlayerFullInfo();                   //Show FullInfo
     
     Hand GetHand(){return mHand;}        //Get info
     int32 GetStack(){return mStack;}     //Get info

@@ -1,11 +1,3 @@
-//
-//  Hand.cpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 30..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #include "Hand.hpp"
 #include <iostream>
 
@@ -40,8 +32,9 @@ void Hand::HandInfo()
 {
     for(int i=0;i<hand.size();i++)
     {
-        std::cout<<hand[i].CardInfo()<<std::endl;
+        std::cout<<"<"<<hand[i].CardInfo()<<"> ";
     }
+    std::cout<<std::endl;
 }
 void CheckMade
 (std::vector<Card> & cHand,std::vector<int> & AllNum,std::vector<int> & UniquedCard,std::vector<int> & SuitCard)
@@ -448,12 +441,10 @@ Match comparefourkind(std::vector<Card> & hand1,std::vector<Card> & hand2)
     else
         return Defeat;
 }
-
 Match comparestraightflush(std::vector<Card> & hand1,std::vector<Card> & hand2)
 {
     return comparestraight(hand1, hand2);
 }
-
 PokerRank Hand::Check_Rank()
 {
     bool onepair,twopair,three,straight,flush,fullhouse,fourkind;
@@ -464,9 +455,8 @@ PokerRank Hand::Check_Rank()
     std::vector<int> numofhand;
     
     CheckMade(this->hand,numofhand,uniqueofcards,suitofcards);
-    
-    
     BitMade(numofhand, suitofcards, num, suit);
+    
     IsPairOrThreeOrFourKind(numofhand,uniqueofcards, onepair, twopair, three, fourkind, fullhouse);
     IsStraightOrFlush(numofhand, suitofcards, straight, flush);
     

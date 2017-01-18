@@ -1,16 +1,11 @@
-//
-//  Player.cpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 29..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #include "Player.hpp"
 Player::Player()
 {
-    std::cout<<"What is your name?:";std::cin>>mName;
-    std::cout<<"How many do you have money?:";std::cin>>mStack;
+    std::cout<<"What is your name?:";
+    std::cin>>mName;
+    std::cout<<"How many do you have money?:";
+    std::cin>>mStack;
+    std::cout<<std::endl;
     
 }
 int32 Player::Bet(Action action,int32 & raisestack)
@@ -50,15 +45,15 @@ int32 Player::Bet(Action action,int32 & raisestack)
             }
             else if(Return_Stack<raisestack)
             {
-                std::cout<<"You must bet more than "<<raisestack<<" Try again"<<std::endl;
+                std::cout<<"You must bet more than "<<raisestack<<std::endl;
                 std::cout<<"How much bet?:";
                 continue;
             }
             else if(Return_Stack<=mStack)
             {
                 std::cout<<"Raise Money:"<<Return_Stack<<std::endl;
-                raisestack+=(Return_Stack-raisestack);
                 mStack-=Return_Stack;
+                raisestack+=(Return_Stack-raisestack);
                 break;
             }
         }
@@ -67,7 +62,7 @@ int32 Player::Bet(Action action,int32 & raisestack)
     {
         mAction=Allin;
         Return_Stack=mStack;
-        raisestack+=(Return_Stack-raisestack);
+        Return_Stack>raisestack ? raisestack+=(Return_Stack-raisestack) : raisestack;
         mStack=0;
         std::cout<<"All-In!!!"<<std::endl;
     }
@@ -75,23 +70,23 @@ int32 Player::Bet(Action action,int32 & raisestack)
 }
 
 
-void Player::PlayerInfo()
+void Player::PlayerHandInfo()
 {
     mHand.HandInfo();
     std::string rank;
     switch (mRank)
     {
-        case StraihtFlush:rank="스트레이트 플러쉬";break;
-        case FourKind:rank="포카드";break;
-        case FullHouse:rank="풀 하우스";break;
-        case Flush:rank="플러쉬";break;
-        case Straight:rank="스트레이트";break;
-        case ThreeKind:rank="트리플";break;
-        case twoPair:rank="투페어";break;
-        case onePair:rank="원페어";break;
-        default:rank="노페어";break;
+        case StraihtFlush:rank="Straight Flush";break;
+        case FourKind:rank="Four-kind";break;
+        case FullHouse:rank="Full House";break;
+        case Flush:rank="Flush";break;
+        case Straight:rank="Straight";break;
+        case ThreeKind:rank="Threeple";break;
+        case twoPair:rank="Two Pair";break;
+        case onePair:rank="One Pair";break;
+        default:rank="No Pair";break;
     }
-    std::cout<<"당신의 카드패는 <"<<rank<<"> 입니다."<<std::endl;
+    std::cout<<"Your Hand <"<<rank<<"> 입니다."<<std::endl;
 }
 Player& Player::operator=(const Hand & ihand)
 {
@@ -134,4 +129,8 @@ bool Player::operator<(const Player & p1)
 {
     return this->mRank>p1.mRank;
 }
-
+void Player::PlayerFullInfo()
+{
+    this->PlayerHandInfo();
+    std::cout<<"Your Stack:"<<this->GetStack()<<std::endl;
+}

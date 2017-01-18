@@ -1,11 +1,3 @@
-//
-//  Deck.cpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 29..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #include "Deck.hpp"
 int myrandom (int i) { return std::rand()%i;}
 Deck::Deck()
@@ -40,5 +32,4 @@ void Deck::CardInfo()
     {
         std::cout<<mDeck[i].CardInfo()<<std::endl;
     }
-       
 }

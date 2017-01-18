@@ -1,11 +1,3 @@
-//
-//  card.cpp
-//  plama
-//
-//  Created by 무제 on 2016. 11. 27..
-//  Copyright © 2016년 무제. All rights reserved.
-//
-
 #include "card.h"
 
 Card::Card(int cS,int cN)
@@ -18,7 +10,7 @@ Card::Card(const Card & copy)
     mSuit=copy.mSuit;
     mNum=copy.mNum;
 }
-std::string Card::CardInfo() // About card(num,suit)
+std::string Card::CardInfo() // Show About card(num,suit)
 {
     std::string su;
     std::string nu;
@@ -55,9 +47,5 @@ std::string Card::CardInfo() // About card(num,suit)
 bool Card::operator<(const Card & cCard) const // operator for sorting 
 {
     return this->mNum <cCard.mNum;
-}
-Card::~Card()
-{
-    
 }
 
